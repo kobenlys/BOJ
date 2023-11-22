@@ -9,12 +9,13 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         int t = Integer.parseInt(br.readLine());
-        
+
+        // dp 배열에 n = 30 r = 30 까지의 조합경우 생성
         int[][] dp = new int[31][31];
         for (int i = 0; i < 31; i++) {
             dp[i][0] = 1;
         }
-        // dp 배열에 30 조합 경우 생성
+        
         for (int i = 1; i < 31; i++) {
             for (int j = 1; j < 31; j++) {
                 // nCr = (n-1)C(r-1) + (n-1)Cr -> 조합 공식 사용
