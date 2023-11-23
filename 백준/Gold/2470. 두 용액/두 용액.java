@@ -7,7 +7,6 @@ public class Main {
     public static int[] arr1;
     public static int min = Integer.MAX_VALUE, len;
 
-
     public static void algorithm(){ // 투포인터 알고리즘 구현
         int sum=0, left=0, right= len-1;
         String res = "";
