@@ -8,8 +8,7 @@ public class Main {
    public static int[][] item;
     public static int[][] dp;
 
-    public static void algorithm() {
-
+    public static void algorithm() { // 냅색 알고리즘
         for (int i = 1; i <= N; i++) {
             for (int j = 1; j <= K; j++) {
                 if (item[i][0] > j) { // J = 현재 무게 보다 물건의 무게가 더 크다면 윗 행 복사
