@@ -5,18 +5,24 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-
+        // 우선순위 큐 오름차순
+        PriorityQueue<Integer> pq1 = new PriorityQueue<>();
+        // 우선순위 큐 내림차순
+        PriorityQueue<Integer> pq2 = new PriorityQueue<>(Comparator.reverseOrder());
+        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         StringTokenizer st;
         int n = Integer.parseInt(br.readLine());
-        int[] arr1 = new int[n];
-        
+
+
         st = new StringTokenizer(br.readLine(), " ");
         for (int i = 0; i < n; i++) {
-            arr1[i] = Integer.parseInt(st.nextToken());
+            int num = Integer.parseInt(st.nextToken());
+            pq1.add(num);
+            pq2.add(num);
         }
-        
-        Arrays.sort(arr1);
-        System.out.println(arr1[0]+" "+arr1[n-1]);
+
+        System.out.println(pq1.peek()+" "+pq2.peek());
     }
 }
