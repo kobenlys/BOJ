@@ -9,26 +9,28 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         StringBuilder sb = new StringBuilder();
-        // HashMap 풀이
-        HashMap<Integer, Boolean> map = new HashMap<>();
+        // 이진탐색 풀이
 
         int N = Integer.parseInt(br.readLine());
+        int[] arr1 = new int[N];
         st = new StringTokenizer(br.readLine(), " ");
 
-        // HashMap에 Key값 입력
+        // 배열에 값 입력
         for (int i = 0; i < N; i++) {
-            map.put(Integer.parseInt(st.nextToken()), true);
+            arr1[i] = Integer.parseInt(st.nextToken());
         }
-
+        // 이진탐색 조건 -> 배열이 sort 되어야 한다.
+        Arrays.sort(arr1);
         int M = Integer.parseInt(br.readLine());
         st = new StringTokenizer(br.readLine(), " ");
 
         for (int i = 0; i < M; i++) {
-
-            // 등록된 Key가 있다면?
-            if (map.containsKey(Integer.parseInt(st.nextToken()))) {
+            int flag = Integer.parseInt(st.nextToken());
+            // binarySearch 메서드 사용하여 검색
+            // 있다면 위치 return 없다면 -1 return
+            if (Arrays.binarySearch(arr1, flag) >= 0) {
                 sb.append(1).append("\n");
-            } else {
+            }else{
                 sb.append(0).append("\n");
             }
         }
