@@ -5,13 +5,12 @@ import java.util.*;
 
 public class Main {
     public static int[][] arr1;
-    public static int N, M, B, tmp, max,min = Integer.MAX_VALUE;
+    public static int N, M, B, tmp, start, end, min = Integer.MAX_VALUE;
 
 
     public static void algorithm() {
-        int T = 0;
         // "땅의 높이는 256작거나 같은 자연수 또는 0 이다."
-        while (T <= max) {
+        while (start <= end) {
             int inv = B;
             int t1 = 0, t2 = 0;
 
@@ -19,7 +18,7 @@ public class Main {
                 for (int j = 0; j < M; j++) {
                     int ground = arr1[i][j];
                     // T로 평탄화 시키기 위해 필요한 작업 횟수
-                    ground = ground - T;
+                    ground = ground - start;
                     int elements = Math.abs(ground);
                     // T로 평탄화 하기 위해선?
                     if (ground > 0) { // 1번 작업 -> 블록제거 + 인벤 + 필요없는 만큼
@@ -35,10 +34,10 @@ public class Main {
             if (inv >= 0) { // T로 평탄화 시키기 위해서 인벤토리에 있는 요소 이상으로 필요하다면 평탄화 불가
                 if (min >= t1 + t2) {
                     min = t1 + t2;
-                    tmp = T;
+                    tmp = start;
                 }
             }
-            T++;
+            start++;
         }
     }
 
@@ -51,15 +50,20 @@ public class Main {
         B = Integer.parseInt(st.nextToken());
         arr1 = new int[N][M];
 
+        start = 257;
+        end = 0;
+
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine(), " ");
             for (int j = 0; j < M; j++) {
                 arr1[i][j] = Integer.parseInt(st.nextToken());
                 // 최댓값 이상으로 검색 할 필요 없음
-                max = Math.max(max, arr1[i][j]);
+                end = Math.max(end, arr1[i][j]);
+                // 최솟값 부터 검색하면 된다.
+                start = Math.min(start, arr1[i][j]);
             }
         }
         algorithm();
-        System.out.println(min+" "+tmp);
+        System.out.println(min + " " + tmp);
     }
 }
