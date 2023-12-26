@@ -23,7 +23,7 @@ public class Main {
         // 이분탐색 범위 설정
         int left = 0, right = max;
 
-        while (left < right) {
+        while (left <= right) {
             // 이분탐색 중간값 구하기
             // ex. 50~100, 중간값은 = 50+(100-50) = 75 이다.
             int mid = (left + right)/ 2;
@@ -38,7 +38,7 @@ public class Main {
 
             // 이분탐색 알고리즘, 시간복잡도때문에 완탐은 불가능 하다.
             if (sum < M) {
-                right = mid;
+                right = mid-1;
             } else {
                 left = mid + 1;
             }
