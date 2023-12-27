@@ -29,13 +29,13 @@ public class Main {
         int min = Integer.MAX_VALUE;
         int sum = 0;
 
-        while (true) { // 투포인터 알고리즘
+        while (true) {
 
             if (sum >= S) {
                 min = Math.min(min, right - left);
                 sum -= arr1[left++];
                
-            } else if (N == right) { // 탈출
+            } else if (N == right) {
                 break;
             }else{
                 sum += arr1[right++];
