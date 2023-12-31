@@ -16,11 +16,12 @@ public class Main {
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
             int res = 1;
-
+            // 소숫점 1의 자리만 필요하기때문에 10으로 나눠준다.
             for (int i = 0; i < b; i++) {
                 res = res * a % 10;
             }
-            System.out.println(res == 0? 10 : res);
+            sb.append(res == 0? 10 : res).append("\n");
         }
+        System.out.println(sb);
     }
 }
