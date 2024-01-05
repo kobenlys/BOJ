@@ -5,6 +5,22 @@ import java.util.*;
 
 public class Main {
 
+    public static boolean isDuple(String num) {
+        for (int j = 0; j < 3; j++) {
+            for (int k = 0; k < 3; k++) {
+                if (j == k) continue;
+                // 0, 중복숫자 있다면 true 리턴한다.
+                if (num.charAt(j) == '0') {
+                    return true;
+                }
+                if (num.charAt(j) == num.charAt(k)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) throws IOException { //조건 입력
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
@@ -12,24 +28,8 @@ public class Main {
         ArrayList<Integer> arr1 = new ArrayList<>();
 
         for (int i = 123; i <= 987; i++) {
-            String num = String.valueOf(i);
-            boolean isDuple = false;
             // 중복된 숫자 또는 '0' 없다면 arr1에 저장한다.
-            st:
-            for (int j = 0; j < 3; j++) {
-                for (int k = 0; k < 3; k++) {
-                    if (j == k) continue;
-                    if (num.charAt(j) == '0') {
-                        isDuple = true;
-                        break st;
-                    }
-                    if (num.charAt(j) == num.charAt(k)) {
-                        isDuple = true;
-                        break st;
-                    }
-                }
-            }
-            if (!isDuple) {
+            if (!isDuple(String.valueOf(i))) {
                 arr1.add(i);
             }
         }
@@ -48,6 +48,7 @@ public class Main {
                 int strikeCnt = 0;
                 int ballCnt = 0;
 
+                // 스트라이크, 볼 세기
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
                         boolean isSame = num.charAt(i) == input.charAt(j);
