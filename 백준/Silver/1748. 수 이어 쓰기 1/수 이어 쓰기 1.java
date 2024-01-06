@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
 
 public class Main {
 
@@ -10,14 +9,17 @@ public class Main {
 
         int N = Integer.parseInt(br.readLine());
         int cnt = 0;
+        int flag = 10;
+        int num = 1;
 
         for (int i = 1; i <= N; i++) {
-            int num = i;
-            while (num != 0) {
-                num = num / 10;
-                cnt++;
+            if (i % flag == 0) {
+                num++;
+                flag *= 10;
             }
+            cnt += num;
         }
+
         System.out.print(cnt);
     }
 }
