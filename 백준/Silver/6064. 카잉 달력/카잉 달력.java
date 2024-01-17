@@ -5,25 +5,17 @@ import java.util.*;
 
 public class Main {
 
-    public static int LCM(int x, int y) {
-        int res = 1;
-        int i = 2;
-        while (true) {
-
-            if (x % i == 0 && y % i == 0) {
-                x = x / i;
-                y = y / i;
-                res *= i;
-            } else {
-                i++;
-            }
-
-            if (i > x || i > y) {
-                res *= x * y;
-                break;
-            }
+    public static int gcd(int a, int b) {
+        while (b != 0) {
+            int tmp = b;
+            b = a % b;
+            a = tmp;
         }
-        return res;
+        return a;
+    }
+
+    public static int lcm(int a, int b) {
+        return (a * b) / gcd(a, b);
     }
 
     public static void main(String[] args) throws IOException { // 값 입력
@@ -40,7 +32,7 @@ public class Main {
             int N = Integer.parseInt(st.nextToken());
             int x = Integer.parseInt(st.nextToken());
             int y = Integer.parseInt(st.nextToken());
-            int size = LCM(M, N);
+            int size = lcm(M, N);
 
             while (true) {
 
