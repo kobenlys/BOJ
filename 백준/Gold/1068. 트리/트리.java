@@ -10,14 +10,16 @@ public class Main {
 
     public static void dfs(int start) {
 
-        if(vi[start]) return;
+        if (vi[start]) return; // 시작노드 제거 하는경우
 
         if (arr1.get(start).isEmpty()) {
+            // 더 이상 탐색불가 == 리프노드임.
             cnt++;
             return;
         }
 
         for (int i = 0; i < arr1.get(start).size(); i++) {
+            // 이동가능한 노드 있을경우 이동
             int e = arr1.get(start).get(i);
             dfs(e);
         }
@@ -50,6 +52,7 @@ public class Main {
         int flag = Integer.parseInt(br.readLine());
         vi[flag] = true;
 
+        // 삭제될 노드에 연결된 간선 인접리스트에서 삭제하기.
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < arr1.get(i).size(); j++) {
                 if (arr1.get(i).get(j) == flag) {
