@@ -18,7 +18,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException { //조건 입력
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+        StringBuilder sb = new StringBuilder();
         int N = 0;
         E_Sieve(); // 에라토스테네스의 체
 
@@ -29,7 +29,8 @@ public class Main {
                     cnt++;
                 }
             }
-            System.out.println(cnt);
+            sb.append(cnt).append("\n");
         }
+        System.out.print(sb);
     }
 }
