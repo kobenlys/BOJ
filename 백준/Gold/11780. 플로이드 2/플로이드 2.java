@@ -76,7 +76,9 @@ public class Main {
                     tmp = trace[i][tmp];
                 }
 
-                sb.append(stk.size() + 1).append(" ").append(i + 1).append(" ");
+                sb.append(stk.size() + 1);
+                sb.append(" ").append(i + 1);
+                sb.append(" ");
 
                 while (!stk.isEmpty()) {
                     sb.append(stk.pop() + 1).append(" ");
