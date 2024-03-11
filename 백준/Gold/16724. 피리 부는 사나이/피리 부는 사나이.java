@@ -12,15 +12,14 @@ public class Main {
 
     public static class node {
         int x, y;
-
         public node(int x, int y) {
             this.x = x;
             this.y = y;
         }
     }
-
+    
     public static void checkTrace(int flag) {
-
+        // 현재 이동경로집합을 원래 존재했던 경로집합에 포함시킨다.
         while (!trace.isEmpty()) {
             node nd = trace.poll();
             vi[nd.y][nd.x] = flag;
@@ -28,7 +27,7 @@ public class Main {
     }
 
     public static void findDeadLock() {
-
+        // RL 교착상태 찾고 cntSafeZone의 숫자로 집합표시
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M - 1; j++) {
                 if (arr1[i][j] == 'R') {
@@ -38,7 +37,7 @@ public class Main {
                 }
             }
         }
-
+        // DU 교착상태 찾고 cntSafeZone의 숫자로 집합표시
         for (int i = 1; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 if (arr1[i][j] == 'U') {
@@ -66,6 +65,7 @@ public class Main {
                         node nd = qu.poll();
                         char nowDir = arr1[nd.y][nd.x];
                         int dx = 0, dy = 0;
+                        // 방향전환
                         switch (nowDir) {
                             case 'U':
                                 dx = nd.x;
@@ -84,13 +84,17 @@ public class Main {
                                 dy = nd.y;
                                 break;
                         }
-
+                        // 경로상 아직 어느집합에도 포함되지 않는 경로
+                        // cntSafeZone숫자로 집합 포함관계 표시.
                         if (vi[dy][dx] == 0) {
                             vi[dy][dx] = cntSafeZone;
-                            qu.offer(new node(dx, dy));
-                            trace.offer(new node(dx, dy));
+                            qu.offer(new node(dx, dy)); // 진행
+                            trace.offer(new node(dx, dy)); // 지나온 경로 저장
                         } else {
+                            // 다른 집합에 포함된 경로 발견시
+                            // 자기 자신이 아니라면
                             if (vi[dy][dx] != cntSafeZone) {
+                                // 다른경로집합에 현재경로집합 포함하기
                                 checkTrace(vi[dy][dx]);
                                 cntSafeZone--;
                             }
@@ -109,16 +113,18 @@ public class Main {
         M = Integer.parseInt(st.nextToken());
         arr1 = new char[N][M];
         vi = new int[N][M];
-
+        
         for (int i = 0; i < N; i++) {
             String str = br.readLine();
             for (int j = 0; j < M; j++) {
                 arr1[i][j] = str.charAt(j);
             }
         }
-
-        findDeadLock();
-        findCircle();
+        // cntSafeZone의 역할 -> 서로다른 경로집합끼리 구분
+        // 결국 집합의 수 만큼 SafeZone이 결정됨
+                        //               D
+        findDeadLock(); // 교착상태 -> RL ,U 경우 cnt, 경로 숫자표시 
+        findCircle(); // 큰 사이클에 포함되는 집합은 같은 숫자로 표시
         System.out.println(cntSafeZone);
     }
 }
