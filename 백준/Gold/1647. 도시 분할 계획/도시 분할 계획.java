@@ -24,12 +24,14 @@ public class Main {
         return parent[x] = find(parent[x]);
     }
     // 자식노드에 부모노드 표시하기.
-    public static void union(int x, int y) {
+    public static boolean union(int x, int y) {
         int from = find(x);
         int to = find(y);
         if (from != to) {
             parent[to] = from;
+            return false;
         }
+        return true;
     }
 
     public static void main(String[] args) throws IOException {
@@ -63,7 +65,7 @@ public class Main {
             int to = find(nd.e);
             // 사이클이 없는 트리를 만들어야 한다.
             // 시작노드와 도착노드가 가지는 부모노드가 같다면 -> 사이클 발생 ->제외한다.
-            if (from != to) {
+            if (!union(nd.s, nd.e)) {
                 ans += nd.v;
                 // 마을을 나누는 간선 정하기.
                 max = Math.max(max, nd.v);
