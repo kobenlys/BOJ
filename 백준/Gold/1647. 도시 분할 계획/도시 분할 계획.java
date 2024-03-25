@@ -69,7 +69,6 @@ public class Main {
                 ans += nd.v;
                 // 마을을 나누는 간선 정하기.
                 max = Math.max(max, nd.v);
-                union(from, to);
             }
         }
         // 모든 마을의 최소가중치로 다 이었을때 그 중에서 가장 큰 가중치를 삭제
