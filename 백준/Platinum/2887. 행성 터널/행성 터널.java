@@ -98,6 +98,9 @@ public class Main {
 
         while (!pq.isEmpty()) {
             planet nd = pq.poll();
+            
+            if(find(nd.s) == find(nd.e)) continue;
+            
             if (!union(nd.s, nd.e)) {
                 ans += nd.v;
             }
