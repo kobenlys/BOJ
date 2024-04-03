@@ -1,94 +1,116 @@
 import java.io.*;
 import java.util.*;
+
 public class Main {
-    static int R, C, day=0;
-    static boolean[][] visited;
-    static char[][] arr;
-    static Queue<Node> waterQ, q;
-    static int[] dx = { -1, 1, 0, 0 };
-    static int[] dy = { 0, 0, 1, -1 };
+    public static int R, C;
+    public static char[][] arr1;
+    public static boolean[][] vi;
+    public static ArrayList<node> swan = new ArrayList<>();
+    public static Queue<node> nowSwan, water;
+    public static int[] dx = {0, 0, -1, 1};
+    public static int[] dy = {-1, 1, 0, 0};
+
+    public static class node {
+        int x, y;
+
+        public node(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    // 물과 인접한 얼음 녹이기.
+    public static void iceMelt() {
+
+        int size = water.size();
+        // 큐에 입력할때, 이번턴에 입력된 데이터 사용방지.
+        for (int i = 0; i < size; i++) {
+            // 물 위치
+            node nd = water.poll();
+
+            for (int j = 0; j < 4; j++) {
+                int nx = nd.x + dx[j];
+                int ny = nd.y + dy[j];
+
+                if (nx < 0 || ny < 0 || nx >= C || ny >= R) continue;
+                // 물과 인접한 얼음 발견시
+                if (arr1[ny][nx] == 'X') {
+                    // 다음턴에 사용될 물 위치 저장, 맵 업데이트
+                    water.offer(new node(nx, ny));
+                    arr1[ny][nx] = '.';
+                }
+            }
+        }
+    }
+
+    // 백조 찾기.
+    public static boolean findSwan() {
+        Queue<node> qu = new LinkedList<>();
+
+        while (!nowSwan.isEmpty()) {
+
+            node nd = nowSwan.poll(); // 이전 턴 백조 위치.
+
+            for (int i = 0; i < 4; i++) {
+                int nx = nd.x + dx[i];
+                int ny = nd.y + dy[i];
+
+                if (nx < 0 || ny < 0 || nx >= C || ny >= R) continue;
+
+                if (!vi[ny][nx]) {
+
+                    if (swan.get(1).x == nx && swan.get(1).y == ny) return false;
+                    vi[ny][nx] = true;
+
+                    // 백조 이동
+                    if (arr1[ny][nx] == '.') {
+                        nowSwan.offer(new node(nx, ny));
+                    } else if (arr1[ny][nx] == 'X') {
+                        // 얼음을 만났다면 다음턴 백조 시작하는 자리임. -> qu에 저장한다.
+                        qu.offer(new node(nx, ny));
+                    }
+                }
+            }
+        }
+        // 시간초과 방지위해 이번턴에 이동했던 백조위치를 저장한다.
+        nowSwan = qu;
+        return true;
+    }
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String[] s = br.readLine().split(" ");
-        C = Integer.parseInt(s[0]);
-        R = Integer.parseInt(s[1]);
-        arr = new char[C][R];
-        visited = new boolean[C][R];
-        waterQ = new LinkedList<>();
-        q = new LinkedList<>();
-        ArrayList<Node> swan = new ArrayList<>();
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        
+        R = Integer.parseInt(st.nextToken());
+        C = Integer.parseInt(st.nextToken());
+        nowSwan = new LinkedList<>();
+        water = new LinkedList<>();
+        vi = new boolean[R][C];
+        arr1 = new char[R][C];
 
-        for (int i = 0; i < C; i++) {
-            char[] c = br.readLine().toCharArray();
-            for (int j = 0; j < R; j++) {
-                arr[i][j] = c[j];
-                if (c[j] == 'L') {
-                    swan.add(new Node(i, j));
-                }
-                if(c[j] != 'X') {
-                    waterQ.add(new Node(i, j));
-                }
-            }
-        }
+        for (int i = 0; i < R; i++) {
+            String input = br.readLine();
+            for (int j = 0; j < C; j++) {
+                char n = input.charAt(j);
+                arr1[i][j] = n;
 
-        q.add(swan.get(0)); // 처음 백조 출발점.
-        while(true) {
-            if (findSwan(swan.get(1))) {
-                System.out.println(day);
-                break;
-            }
-            breakIce();
-            day++;
-        }
-
-    }
-    public static void breakIce() {
-        int size = waterQ.size();
-        for (int k = 0; k < size; k++) {
-            Node n = waterQ.poll();
-            for (int i = 0; i < 4; i++) {
-                int nx = n.x + dx[i];
-                int ny = n.y + dy[i];
-                if (nx < 0 || ny < 0 || nx >= C || ny >= R)
-                    continue;
-                if (arr[nx][ny] == 'X') {
-                    arr[nx][ny] = '.';
-                    waterQ.add(new Node(nx, ny));
+                if (n == 'L') {
+                    swan.add(new node(j, i));
+                    water.offer(new node(j, i)); // 당연히 물위에 백조가 있다..
+                    arr1[i][j] = '.';
+                } else if (n == '.') {
+                    water.offer(new node(j, i));
                 }
             }
         }
 
-    }
-    public static boolean findSwan(Node end) {
-        Queue<Node> swanQ = new LinkedList<>();
-        while(!q.isEmpty()) {
-            Node n = q.poll();
-            if (n.x == end.x && n.y == end.y) {
-                return true;
-            }
-            for (int i = 0; i < 4; i++) {
-                int nx = n.x + dx[i];
-                int ny = n.y + dy[i];
-                if (nx < 0 || ny < 0 || nx >= C || ny >= R || visited[nx][ny])
-                    continue;
-                visited[nx][ny] = true;
-                if (arr[nx][ny] == 'X') {
-                    swanQ.add(new Node(nx, ny));
-                    continue; // 얼음 벽은 갱신용이기 때문에 굳이 큐(q)에 추가할 필요X.
-                }
-                q.add(new Node(nx, ny));
-            }
+        int cnt = 0;
+        nowSwan.add(new node(swan.get(0).x, swan.get(0).y)); // 처음 백조위치
+        // findSwan() 함수가 false를 리턴시 루프 종료.
+        while (findSwan()) {
+            iceMelt();
+            cnt++;
         }
-        q = swanQ; // 백조가 만난 얼음벽이 다음 날 출발지점.
-
-        return false;
-    }
-}
-class Node {
-    int x, y;
-    Node (int x, int y) {
-        this.x = x;
-        this.y = y;
+        System.out.println(cnt);
     }
 }
