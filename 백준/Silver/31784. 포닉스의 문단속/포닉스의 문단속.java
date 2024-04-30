@@ -15,7 +15,7 @@ public class Main {
         char[] arr1 = new char[N];
 
         for (int i = 0; i < N; i++) {
-
+            // A가 아닌 문자를 A로 변경 할 수 있는지.
             if (str.charAt(i) != 'A' && 26 - (str.charAt(i) - 'A') <= K) {
                 int tmp = 26 - (str.charAt(i) - 'A');
                 K -= tmp;
@@ -26,6 +26,7 @@ public class Main {
             }
         }
 
+        // 모든 계산끝난 후 K가 남아있다면 가장 마지막 문자로 다이얼 돌리기.
         while (K-- > 0) {
             arr1[N - 1] = (char) ((arr1[N - 1] - 'A' + 1) % 26 + 'A');
         }
