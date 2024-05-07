@@ -4,11 +4,11 @@ import java.util.*;
 public class Main {
     public static int A, B;
     public static boolean[] prime;
-    
-    // 소수 판정
+
     public static void E_Sieve() {
+
         prime[0] = prime[1] = true;
-        // 제곱근까지 에라토스테네스 체 실행하기
+
         for (int i = 2; i <= Math.sqrt(B); i++) {
 
             if (prime[i]) continue;
@@ -17,18 +17,18 @@ public class Main {
             }
         }
     }
-    
-    // 회문 검사, 문자열 길이가 짧으니 reverse로 처리
+
     public static boolean isPalindrome(int n) {
-        StringBuilder tmp = new StringBuilder();
 
         String str = String.valueOf(n);
-        tmp.append(str);
-        String reverse = tmp.reverse().toString();
-        if (str.equals(reverse)) {
-            return true;
+
+        for (int i = 0; i < str.length()/2; i++) {
+
+            if (str.charAt(i) != str.charAt(str.length() - i - 1)) {
+                return false;
+            }
         }
-        return false;
+        return true;
     }
 
     public static void main(String[] args) throws IOException {
