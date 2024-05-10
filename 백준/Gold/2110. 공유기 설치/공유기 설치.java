@@ -9,11 +9,16 @@ public class Main {
         int cnt = 1;
         int home1 = arr1[0];
 
-        for (int i = 0; i < N; i++) {
-            if (arr1[i] - home1 >= len) {
-                cnt++;
-                home1 = arr1[i];
+        for (int i = 0; i < N - 1;) {
+            int tmp = arr1[i] + len;
+            int j;
+            for (j = i + 1; j < N; j++) {
+                if (tmp <= arr1[j]) {
+                    cnt++;
+                    break;
+                }
             }
+            i = j; // i를 j로 갱신하여 다음 비교를 위해 인덱스를 설정
         }
 
         if (cnt >= C) {
