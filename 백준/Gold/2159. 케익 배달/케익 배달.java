@@ -21,7 +21,7 @@ public class Main {
         Queue<node> qu = new LinkedList<>();
         int[] dx = {0, 0, 0, -1, 1};
         int[] dy = {0, -1, 1, 0, 0};
-        // 초깃값 설정
+        // 초깃값 설정, 배달을 근처에 두는것이 최적값일 수도 있음.
         dist[0][0] = dist[0][1] = dist[0][2]
                 = dist[0][3] = dist[0][4] = 0;
         qu.offer(new node(x, y, 0, 0));
@@ -32,20 +32,17 @@ public class Main {
             if (now.idx + 1 == N+1) continue;
 
             for (int i = 0; i < arr1.get(now.idx + 1).size(); i++) {
-
                 node tmp = arr1.get(now.idx + 1).get(i);
 
                 for (int j = 0; j < 5; j++) {
                     int nx = tmp.x + dx[j];
                     int ny = tmp.y + dy[j];
-
-
+                    
                     if (nx < 1 || ny < 1 || nx > 100_000 || ny > 100_000) continue;
-
+                    // 맨해튼 거리공식.
                     long val = Math.abs(nx - now.x) + Math.abs(ny - now.y);
 
                     if (dist[tmp.idx][j] > dist[now.idx][now.dir] + val) {
-
                         dist[tmp.idx][j] = dist[now.idx][now.dir] + val;
                         qu.offer(new node(nx, ny, tmp.idx, j));
                     }
@@ -68,7 +65,8 @@ public class Main {
         int Y = Integer.parseInt(st.nextToken());
 
         arr1 = new ArrayList<>();
-        dist = new long[N+1][5];
+        // 배달을 고객 근처에하는게 최적 값일 수 있음.
+        dist = new long[N+1][5]; 
 
         for (int i = 0; i < N+1; i++) {
             arr1.add(new ArrayList<>());
@@ -83,9 +81,10 @@ public class Main {
             int y = Integer.parseInt(st.nextToken());
             arr1.get(i).add(new node(x, y, i, 0));
         }
-
+        
+        // 다익스트라 알고리즘 실행
         dijkstra(X, Y);
-
+        
         for (int j = 0; j < 5; j++) {
             answer = Math.min(answer, dist[N][j]);
         }
