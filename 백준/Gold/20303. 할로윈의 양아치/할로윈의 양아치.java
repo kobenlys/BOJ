@@ -1,0 +1,72 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static int[] parent;
+
+    public static int find(int x) {
+        if (parent[x] == x) return x;
+        return parent[x] = find(parent[x]);
+    }
+
+    public static void union(int x, int y) {
+        int from = find(x);
+        int to = find(y);
+        if (from != to) {
+            parent[to] = from;
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+
+        parent = new int[N + 1];
+        int[][] arr1 = new int[N + 1][2];
+        int[] candyValue = new int[N + 1];
+        int[][] dp = new int[N + 1][K];
+
+
+        for (int i = 0; i <= N; i++) {
+            parent[i] = i;
+        }
+
+        st = new StringTokenizer(br.readLine());
+        for (int i = 1; i <= N; i++) {
+            candyValue[i] = Integer.parseInt(st.nextToken());
+        }
+
+        for (int i = 0; i < M; i++) {
+            st = new StringTokenizer(br.readLine());
+            int s = Integer.parseInt(st.nextToken());
+            int e = Integer.parseInt(st.nextToken());
+            union(s, e);
+        }
+
+        for (int i = 1; i <= N; i++) {
+            int root = find(i);
+            arr1[root][0]++;
+            arr1[root][1] += candyValue[i];
+        }
+
+        Arrays.sort(arr1, Comparator.comparingInt(o -> o[0]));
+
+
+        for (int i = 1; i <= N; i++) {
+            for (int j = 1; j < K; j++) {
+                if (arr1[i][0] > j) {
+                    dp[i][j] = dp[i - 1][j];
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - arr1[i][0]] + arr1[i][1]);
+                }
+            }
+        }
+
+        System.out.print(dp[N][K - 1]);
+    }
+}
