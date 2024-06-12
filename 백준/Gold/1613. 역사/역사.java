@@ -4,7 +4,6 @@ import java.util.*;
 public class Main {
     public static int N;
     public static boolean[][] arr1;
-    public static boolean[][] arr1Rvrs;
 
     public static void floydWarshall() {
 
@@ -20,18 +19,6 @@ public class Main {
                 }
             }
         }
-
-        for (int fw = 0; fw < N; fw++) {
-            for (int i = 0; i < N; i++) {
-                for (int j = 0; j < N; j++) {
-                    if (i == j) continue;
-
-                    if (arr1Rvrs[i][fw] && arr1Rvrs[fw][j]) {
-                        arr1Rvrs[i][j] = true;
-                    }
-                }
-            }
-        }
     }
 
     public static void main(String[] args) throws IOException {
@@ -44,14 +31,12 @@ public class Main {
         int K = Integer.parseInt(st.nextToken());
 
         arr1 = new boolean[N][N];
-        arr1Rvrs = new boolean[N][N];
 
         for (int i = 0; i < K; i++) {
             st = new StringTokenizer(br.readLine());
             int s = Integer.parseInt(st.nextToken()) - 1;
             int e = Integer.parseInt(st.nextToken()) - 1;
             arr1[s][e] = true;
-            arr1Rvrs[e][s] = true;
         }
 
         floydWarshall();
@@ -64,7 +49,7 @@ public class Main {
 
             if (arr1[s][e]) {
                 sb.append(-1).append("\n");
-            } else if (arr1Rvrs[s][e]) {
+            } else if (arr1[e][s]) {
                 sb.append(1).append("\n");
             } else {
                 sb.append(0).append("\n");
