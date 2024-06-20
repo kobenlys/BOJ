@@ -2,34 +2,26 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    public static int answer;
-    public static Deque<Integer> left = new ArrayDeque<>();
-    public static Deque<Integer> right = new ArrayDeque<>();
+    public static int N;
+    public static int[] left;
+    public static int[] right;
+    public static int[][] dp;
 
-    public static void dfs(int sum) {
+    public static int dfs(int l, int r) {
 
-        if (left.isEmpty() || right.isEmpty()) {
-            answer = Math.max(answer, sum);
-            return;
+        // 모든 카드를 다 사용했다면 Top-Down시작
+        if (l == N || r == N) return 0;
+        // 방문했다면 리턴
+        if (dp[l][r] != -1) return dp[l][r];
+
+        // 왼쪽카드만 버리는 경우 , 왼쪽 오른쪽 카드 둘 다 버리는 경우.
+        dp[l][r] = Math.max(dfs(l + 1, r), dfs(l + 1, r + 1));
+
+        // 만약 오른쪽 카드가 왼쪽 보다 작다면 오른쪽 카드 버리고 + 버린카드 점수 합계
+        if (left[l] > right[r]) {
+            dp[l][r] = Math.max(dp[l][r], dfs(l, r + 1) + right[r]);
         }
-
-
-        if (left.peekFirst() > right.peekFirst()) {
-            int tmp = right.pollFirst();
-            dfs(sum + tmp);
-            right.offerFirst(tmp);
-
-        } else {
-            int tmpLeft = left.pollFirst();
-            dfs(sum);
-
-            int tmpRight = right.pollFirst();
-            dfs(sum);
-
-            left.offerFirst(tmpLeft);
-            right.offerFirst(tmpRight);
-        }
-
+        return dp[l][r];
     }
 
     public static void main(String[] args) throws IOException {
@@ -37,17 +29,20 @@ public class Main {
         StringTokenizer st1;
         StringTokenizer st2;
 
-        int N = Integer.parseInt(br.readLine());
-        answer = 0;
+        N = Integer.parseInt(br.readLine());
+        dp = new int[N][N];
+        left = new int[N];
+        right = new int[N];
 
         st1 = new StringTokenizer(br.readLine());
         st2 = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
-            left.offerLast(Integer.parseInt(st1.nextToken()));
-            right.offerLast(Integer.parseInt(st2.nextToken()));
+            left[i] = Integer.parseInt(st1.nextToken());
+            right[i] = Integer.parseInt(st2.nextToken());
+            Arrays.fill(dp[i], -1);
         }
 
-        dfs(0);
-        System.out.println(answer);
+        // 다이나믹 프로그래밍 (Top - Down)
+        System.out.println(dfs(0, 0));
     }
 }
