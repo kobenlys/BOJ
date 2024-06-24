@@ -15,6 +15,7 @@ public class Main {
         }
     }
 
+    // 해당 그물에 속하는 물고기 수 카운팅
     public static int cntFish(int x, int y, int netX, int netY) {
         int cnt = 0;
 
@@ -47,34 +48,32 @@ public class Main {
             arr1.add(new node(x, y));
         }
 
+        // I의 둘래를 가진 직사각형의 각 변 생성
         for (int i = 1; i < I / 2; i++) {
             netList.add(new node(i, I / 2 - i));
             netList.add(new node(I / 2 - i, i));
         }
 
-
-
+        // p1, p2 물고기가 직사각형 테두리에 걸치도록 그물 범위 설정
         for (node p1 : arr1) {
             for (node p2 : arr1) {
-
+                // 그물의 범위 설정
                 for (node net : netList) {
                     int x = p1.x;
                     int y = p2.y;
 
+                    // 그물이 밖에 못나가도록 수정
                     if (x + net.x > N) {
                         x = N - net.x;
-                        if (x < 1) continue;
                     }
 
                     if (y + net.y > N) {
                         y = N - net.y;
-                        if (y < 1) continue;
                     }
                     answer = Math.max(answer, cntFish(x, y, net.x, net.y));
                 }
             }
         }
         System.out.println(answer);
-
     }
 }
