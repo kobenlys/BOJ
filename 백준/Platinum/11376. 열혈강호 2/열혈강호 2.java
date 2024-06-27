@@ -34,14 +34,12 @@ public class Main {
         match = new int[M + 1];
         vi = new boolean[M + 1];
         arr1 = new ArrayList<>();
-
-        for (int i = 0; i <= N; i++) {
-            arr1.add(new ArrayList<>());
-        }
+        arr1.add(new ArrayList<>());
 
         for (int i = 1; i <= N; i++) {
             st = new StringTokenizer(br.readLine());
             int t = Integer.parseInt(st.nextToken());
+            arr1.add(new ArrayList<>());
             while (t-- > 0) {
                 int s = Integer.parseInt(st.nextToken());
                 arr1.get(i).add(s);
@@ -49,7 +47,7 @@ public class Main {
         }
 
 
-        for (int i = 1; i <= N; i++) {
+        for (int i = 1; i <= N && answer < M; i++) {
 
             for (int j = 0; j < 2; j++) {
                 vi = new boolean[M + 1];
