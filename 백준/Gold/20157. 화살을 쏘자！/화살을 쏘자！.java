@@ -21,14 +21,9 @@ public class Main {
             int x = Integer.parseInt(st.nextToken());
             int y = Integer.parseInt(st.nextToken());
             String res;
-            if (x != 0 && y != 0) {
-                int gcd = GCD(Math.abs(x), Math.abs(y));
-                // (y2 - y1) / (x2 - x1) 후 기약분수로 변환 (최대공약수로 나눠야함)
-                res = y / gcd + " / " + x / gcd;
-            } else {
-                int gcd = Math.max(Math.abs(x), Math.abs(y));
-                res = y / gcd + " / " + x / gcd;
-            }
+            int gcd = GCD(Math.abs(x), Math.abs(y));
+            // (y2 - y1) / (x2 - x1) 후 기약분수로 변환 (최대공약수로 나눠야함)
+            res = y / gcd + " / " + x / gcd;
 
             map.put(res, map.getOrDefault(res, 0) + 1);
             max = Math.max(max, map.get(res));
