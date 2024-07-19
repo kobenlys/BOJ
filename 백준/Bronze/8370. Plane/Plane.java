@@ -1,0 +1,19 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        st = new StringTokenizer(br.readLine());
+
+        int N = Integer.parseInt(st.nextToken());
+        int K1 = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int K2 = Integer.parseInt(st.nextToken());
+        System.out.println((N * K1) + (M * K2));
+        
+    }
+}
