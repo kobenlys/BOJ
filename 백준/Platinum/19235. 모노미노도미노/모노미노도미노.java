@@ -6,6 +6,7 @@ public class Main {
     public static int[][] blueMap;
     public static int[][] greenMap;
 
+    // 파랑보드 1x1 블럭 생성
     public static void typeOneBlue(int y, int limit) {
         int lastX = 0;
         for (int i = limit; i < 6; i++) {
@@ -18,6 +19,7 @@ public class Main {
         blueMap[y][lastX] = 1;
     }
 
+    // 초록보드 1x1 블럭 생성
     public static void typeOneGreen(int x, int limit) {
         int lastY = 0;
         for (int i = limit; i < 6; i++) {
@@ -30,8 +32,10 @@ public class Main {
         greenMap[lastY][x] = 1;
     }
 
+    // 파랑보드 2x1 블럭 생성
     public static void typeTwoBlue(int y, int limit) {
         int lastX = 0;
+        // 2x1 블럭이 걸리지 않는 조건에서 최대한 밑에 배치하기
         for (int i = limit; i < 6; i++) {
             if (blueMap[y][i] == 0 && blueMap[y + 1][i] == 0) {
                 lastX = i;
@@ -43,8 +47,10 @@ public class Main {
         blueMap[y + 1][lastX] = 2;
     }
 
+    // 파랑보드 2x1 블럭 생성
     public static void typeTwoGreen(int x, int limit) {
         int lastY = 0;
+        // 2x1 블럭이 걸리지 않는 조건에서 최대한 밑에 배치하기
         for (int i = limit; i < 6; i++) {
             if (greenMap[i][x] == 0 && greenMap[i][x + 1] == 0) {
                 lastY = i;
@@ -56,6 +62,7 @@ public class Main {
         greenMap[lastY][x + 1] = 2;
     }
 
+    // 완성된 열 모든 블럭 제거 후 스코어++
     public static boolean scoreCntBlue() {
         boolean isUpdate = false;
         for (int i = 0; i < 6; i++) {
@@ -73,10 +80,10 @@ public class Main {
                 blueMap[j][i] = 0;
             }
         }
-
         return isUpdate;
     }
 
+    // 완성된 행 모든 블럭 제거 후 스코어++
     public static boolean scoreCntGreen() {
         boolean isUpdate = false;
         for (int i = 0; i < 6; i++) {
@@ -94,10 +101,10 @@ public class Main {
                 greenMap[i][j] = 0;
             }
         }
-
         return isUpdate;
     }
 
+    // 각보드 별 세이프존에 블럭이 있다면, 있는 수 만큼 가장 밑 보드 행렬 제거
     public static boolean checkSafeAndDelete() {
         int cntB = 0;
         int cntG = 0;
@@ -134,9 +141,12 @@ public class Main {
         return false;
     }
 
+    // 파랑보드 블럭 내리기,
     public static void sortBlockBlue() {
         for (int i = 4; i >= 0; i--) {
             for (int j = 0; j < 4; j++) {
+                // 따로 만들 필요없이, 이미 만들어진 블럭배치 함수를 재사용한다
+                // 리미트  -> 끝 범위 안에서 블럭 배치한다.
                 if (blueMap[j][i] == 1) {
                     blueMap[j][i] = 0;
                     typeOneBlue(j, i);
@@ -152,9 +162,12 @@ public class Main {
         }
     }
 
+    // 초록보드 블럭 내리기
     public static void sortBlockGreen() {
         for (int i = 4; i >= 0; i--) {
             for (int j = 0; j < 4; j++) {
+                // 따로 만들 필요없이, 이미 만들어진 블럭배치 함수를 재사용한다
+                // 리미트  -> 끝 범위 안에서 블럭 배치한다.
                 if (greenMap[i][j] == 1) {
                     greenMap[i][j] = 0;
                     typeOneGreen(j, i);
@@ -174,29 +187,6 @@ public class Main {
 
         int N = Integer.parseInt(br.readLine());
 
-        // ㅁ
-        // ㅁ ㅁ
-        // ㅁ
-        // ㅁ
-
-        // [순서]
-        // 1. 블럭을 쌓는다 모든 블력은 레드블럭에서 시작히기때문에 범위를 벗어나지 않는다
-        // 2. 블럭을 가장 끝 인덱스 부터 넣을 수 있는지 체크한다.
-        // 3. 행, 열이 블럭으로 가득찬 곳 제거하면서 스코어 ++
-        // 4. 블럭을 아래인덱스로 다시 정렬 후 3번 반복
-        // 5. 3번에서 스코어를 얻지 못했다면 6번 실행
-        // 6. 각 보드의 0,1 행,열(safeZone)에 블럭있는지 확인
-        // 7. 블럭이 있다면 블럭이 있는 행,열 만큼 마지막 인덱스 제거
-        // 8. 다시 반복
-
-        // 각 블럭 세로블럭은 그냥 각각 다른 1X1블럭으로 생각해도됨 즉 1*1 블럭을 2번 쌓자
-
-        // [ 재료 ]
-        // 1. 1x1 블록,  2x1,1x2 블럭
-        // 2. 스코어 체크
-        // 3. 블럭 아래로 정렬 + 1x2 , 2x1 블럭 예외처리
-        // 4. safeZone 카운트 및 아래 행렬 제거
-
         blueMap = new int[4][6];
         greenMap = new int[6][4];
 
@@ -205,7 +195,14 @@ public class Main {
             int type = Integer.parseInt(st.nextToken());
             int y = Integer.parseInt(st.nextToken());
             int x = Integer.parseInt(st.nextToken());
-
+            
+            // 그린기준
+            // 1x1 블럭은 typeOne 함수 사용해서 배치
+            // 1x2(가로) 블럭은 typeTwo 함수 사용해서 배치
+            // 2x1(세로) 블럭은 typeOne 함수 2번 사용해서 배치.
+            // -> 세로블럭은 다른 블럭과 걸칠 수 없기 때문에, 1x1블럭 2개로 생성해도 무관하다.
+            // -> 반대로 가로블럭은 밑으로 이동시 다른 블럭에 걸칠 수 있기때문에 예외처리 해야한다.
+            
             if (type == 1) {
                 typeOneBlue(y, 0);
                 typeOneGreen(x, 0);
@@ -223,22 +220,29 @@ public class Main {
                 typeTwoBlue(y, 0);
             }
 
-            while (scoreCntBlue()) {
-                sortBlockBlue();
+            // 파랑보드, 초록보드 테트리스
+            // 완성 -> 블럭 내리기 -> 완성, 반복적으로 제거
+            while (scoreCntBlue()) { // 열 완성시
+                sortBlockBlue(); // 윗 블럭 내리기.
             }
 
             while (scoreCntGreen()) {
-                sortBlockGreen();
+                sortBlockGreen(); // 윗 블럭 내리기.
             }
 
-            if (checkSafeAndDelete()) {
+            // 더 이상 점수를 올릴 수 없다면
+            // 만약 세이프존에 블럭 있다면
+            // true -> 블럭이 있는 행, 열  숫자만큼 가장 밑에 있는 블럭 모두 제거
+            // false -> 패스
+            if (checkSafeAndDelete()) { // 만약 세이프존에 블럭이 있다면
+                // 가장 밑 블럭제거 후, 다시 블럭 내리기.
                 sortBlockBlue();
                 sortBlockGreen();
             }
         }
+
         int cntExistBlock = 0;
-
-
+        // 남은 블럭 찾기
         for (int i = 2; i < 6; i++) {
             for (int j = 0; j < 4; j++) {
                 if (blueMap[j][i] > 0) cntExistBlock++;
