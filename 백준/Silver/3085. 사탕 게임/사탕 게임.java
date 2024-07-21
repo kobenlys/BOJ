@@ -54,22 +54,24 @@ public class Main {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
 
+                // 현재좌표기준  무(교환 x) 상 하 좌 우 탐색
                 for (int k = 0; k < 5; k++) {
-                    int res = 0;
                     int nx = j + dx[k];
                     int ny = i + dy[k];
                     if (nx < 0 || ny < 0 || nx >= N || ny >= N) continue;
 
-                    char tmp = arr1[i][j];
-                    arr1[i][j] = arr1[ny][nx];
-                    arr1[ny][nx] = tmp;
+                    char before = arr1[i][j];
+                    char after = arr1[ny][nx];
 
-                    res = Math.max(checkRow(j, i), checkColumm(j, i));
+                    // 변경 후
+                    arr1[i][j] = after;
+                    arr1[ny][nx] = before;
 
-                    tmp = arr1[i][j];
-                    arr1[i][j] = arr1[ny][nx];
-                    arr1[ny][nx] = tmp;
+                    int res = Math.max(checkRow(j, i), checkColumm(j, i));
 
+                    // 다음계산을 위해 원위치
+                    arr1[i][j] = before;
+                    arr1[ny][nx] = after;
                     answer = Math.max(answer, res);
                 }
             }
