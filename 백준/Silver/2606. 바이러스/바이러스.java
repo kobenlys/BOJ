@@ -1,53 +1,52 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
-
 public class Main {
-    public static int[][] arr1;
-    public static boolean[] vi;
-    public static int pc, N, cnt;
+    public static int N;
+    public static boolean[][] arr1;
 
-    public static void algorithm(int now) {
+    // 플로이드 워셜 알고리즘
+    public static void floydWarshall() {
 
-        vi[now] = true;
+        for (int fw = 1; fw <= N; fw++) { // fw 노드를 기준으로
+            for (int i = 1; i <= N; i++) { // i 에서
+                for (int j = 1; j <= N; j++) { // j로 가는것이 가능한지?
+                    if (i == j) continue;
 
-        for (int i = 1; i <= pc; i++) {
-            if (arr1[now][i] == 1 && !vi[i]) {
-                
-                cnt++;
-                algorithm(i);
-
+                    // i -> fw -> j
+                    // 즉 i -> j로 갈때 fw를 거쳐서 갈 수 있는지 판단
+                    if (arr1[i][fw] && arr1[fw][j]) {
+                        arr1[i][j] = true;
+                    }
+                }
             }
         }
-
     }
 
-    public static void main(String[] args) throws IOException { //조건 입력
-
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
 
-        pc = Integer.parseInt(br.readLine()); // 컴퓨터 수
-        N = Integer.parseInt(br.readLine()); // 컴퓨터 커넥션 수
 
-        arr1 = new int[pc+1][pc+1];
-        vi = new boolean[pc+1];
+        N = Integer.parseInt(br.readLine());
+        int M = Integer.parseInt(br.readLine());
 
-        for (int i = 0; i < N; i++) {
-            st = new StringTokenizer(br.readLine(), " ");
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
+        arr1 = new boolean[N + 1][N + 1];
 
-            arr1[a][b] = arr1[b][a] = 1;
-
+        while (M-- > 0) {
+            st = new StringTokenizer(br.readLine());
+            int s = Integer.parseInt(st.nextToken());
+            int e = Integer.parseInt(st.nextToken());
+            arr1[s][e] = arr1[e][s] = true;
         }
 
+        floydWarshall();
+        int answer = 0;
 
-
-        algorithm(1);
-        System.out.println(cnt);
-
+        // 1 -> i 갈 수 있다면 개수 세기
+        for (int i = 2; i <= N; i++) {
+            if (arr1[1][i]) answer++;
+        }
+        System.out.println(answer);
     }
 }
