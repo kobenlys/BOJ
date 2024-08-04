@@ -3,9 +3,9 @@ import java.util.*;
 
 public class Main {
     public static int N, peopleCnt, answer = Integer.MAX_VALUE;
-    public static boolean[] vi;
     public static int[] people;
     public static int[] parent;
+    public static boolean[] vi;
     public static boolean[][] arr1;
     public static ArrayList<Integer> nCrBlueNode;
     public static ArrayList<Integer> nCrRedNode;
@@ -25,7 +25,6 @@ public class Main {
     }
 
     public static void garryMendering() {
-
         nCrRedNode = new ArrayList<>();
         parent = new int[N + 1];
 
@@ -41,6 +40,7 @@ public class Main {
                 nCrRedNode.add(i);
             }
         }
+ 
 
         for (int i = 0; i < nCrRedNode.size(); i++) {
             sum1 += people[nCrRedNode.get(i)];
@@ -112,7 +112,6 @@ public class Main {
             peopleCnt += people[i];
         }
 
-
         for (int i = 1; i <= N; i++) {
             st = new StringTokenizer(br.readLine());
             int time = Integer.parseInt(st.nextToken());
@@ -123,11 +122,10 @@ public class Main {
             }
         }
 
-        for (int i = 1; i < N; i++) {
+        for (int i = 1; i <= N/2; i++) {
             vi = new boolean[N + 1];
             dfs(1, i);
         }
-
 
         System.out.println(answer == Integer.MAX_VALUE ? -1 : answer);
     }
