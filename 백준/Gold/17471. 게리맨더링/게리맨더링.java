@@ -40,7 +40,6 @@ public class Main {
                 nCrRedNode.add(i);
             }
         }
- 
 
         for (int i = 0; i < nCrRedNode.size(); i++) {
             sum1 += people[nCrRedNode.get(i)];
@@ -84,13 +83,9 @@ public class Main {
         }
 
         for (int i = node; i <= N; i++) {
-            if (!vi[i]) {
-                vi[i] = true;
-                nCrBlueNode.add(i);
-                dfs(node + 1, cnt - 1);
-                nCrBlueNode.remove(nCrBlueNode.size() - 1);
-                vi[i] = false;
-            }
+            nCrBlueNode.add(i);
+            dfs(i + 1, cnt - 1);
+            nCrBlueNode.remove(nCrBlueNode.size() - 1);
         }
     }
 
@@ -122,7 +117,7 @@ public class Main {
             }
         }
 
-        for (int i = 1; i <= N/2; i++) {
+        for (int i = 1; i <= N / 2; i++) {
             vi = new boolean[N + 1];
             dfs(1, i);
         }
