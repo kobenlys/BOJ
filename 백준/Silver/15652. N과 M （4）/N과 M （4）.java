@@ -3,29 +3,25 @@ import java.util.*;
 
 public class Main {
     public static int N, M;
-    public static HashSet<Integer> set = new HashSet<>();
     public static StringBuilder sb;
     public static StringBuilder answer;
 
     public static void dfs(int num, int cnt, int idx) {
 
         if (cnt == M) {
+
             sb = new StringBuilder(String.valueOf(num));
-            if (!set.contains(num)) {
-                String t = sb.toString();
-                for (int i = 0; i < sb.length(); i++) {
-                    answer.append(t.charAt(i)).append(" ");
-
-                }
-                answer.append("\n");
-                set.add(num);
+            String t = sb.toString();
+            
+            for (int i = 0; i < sb.length(); i++) {
+                answer.append(t.charAt(i)).append(" ");
             }
-
+            answer.append("\n");
             return;
         }
 
         for (int i = idx; i <= N; i++) {
-            dfs(num * 10 + i, cnt+1, i);
+            dfs(num * 10 + i, cnt + 1, i);
         }
     }
 
