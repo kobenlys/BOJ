@@ -1,45 +1,48 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
 public class Main {
     public static int N, M;
-    public static ArrayList<String> aar = new ArrayList<>();
+    public static HashSet<Integer> set = new HashSet<>();
+    public static StringBuilder sb;
+    public static StringBuilder answer;
 
-    public static void dfs(int start, String val, int num) {
-        // M 길이 달성시 저장 후 리턴
-        if (start == M) {
-            aar.add(val);
+    public static void dfs(int num, int cnt, int idx) {
+
+        if (cnt == M) {
+            sb = new StringBuilder(String.valueOf(num));
+            if (!set.contains(num)) {
+                String t = sb.toString();
+                for (int i = 0; i < sb.length(); i++) {
+                    answer.append(t.charAt(i)).append(" ");
+
+                }
+                answer.append("\n");
+                set.add(num);
+            }
+
             return;
         }
-        // 오름차순 정렬 이기때문에 num 이상 부터 숫자를 붙여준다.
-        for (int i = num; i <= N; i++) {
-            String tmp = val;
-            if (val.isEmpty()) {
-                val = val.concat(String.valueOf(i));
-            } else {
-                val = val.concat(" ").concat(String.valueOf(i));
-            }
-            dfs(start + 1, val,i);
-            val = tmp;
+
+        for (int i = idx; i <= N; i++) {
+            dfs(num * 10 + i, cnt+1, i);
         }
     }
 
-    public static void main(String[] args) throws IOException { //조건 입력
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-        StringBuilder sb = new StringBuilder();
+        answer = new StringBuilder();
+        StringTokenizer st;
 
+        st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
 
-        dfs(0,"",1);
+        // 4개에서 2개를 고르는 경우
+        // 4! / (4-2)2! = 6
+        dfs(0, 0, 1);
 
-        Collections.sort(aar);
-        for (String s : aar) {
-            sb.append(s).append("\n");
-        }
-        System.out.print(sb);
+
+        System.out.println(answer);
     }
 }
