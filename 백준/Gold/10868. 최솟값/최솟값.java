@@ -16,20 +16,6 @@ public class Main {
         return segment[idx] = Math.min(init(start, mid, idx * 2), init(mid + 1, end, idx * 2 + 1));
     }
 
-    public static void update(int start, int end, int idx, int id, int val) {
-        if (id < start || id > end) return;
-
-        if (start == end) {
-            segment[idx] = val;
-            return;
-        }
-
-        int mid = getMid(start, end);
-        update(start, mid, idx * 2, id, val);
-        update(mid + 1, end, idx * 2 + 1, id, val);
-        segment[idx] = Math.min(segment[idx * 2], segment[idx * 2 + 1]);
-    }
-
     public static int getMin(int start, int end, int idx, int left, int right) {
         if(right < start || left > end) return Integer.MAX_VALUE;
         if(left <= start && right >= end) return segment[idx];
