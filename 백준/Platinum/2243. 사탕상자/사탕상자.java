@@ -15,7 +15,7 @@ public class Main {
         int mid = (start + end) / 2;
         update(start, mid, idx * 2, id, val);
         update(mid + 1, end, idx * 2 + 1, id, val);
-        //segment[idx] = segment[idx * 2] + segment[idx * 2 + 1];
+        segment[idx] = segment[idx * 2] + segment[idx * 2 + 1];
     }
 
     public static int getCandy(int start, int end, int idx, int target) {
@@ -46,12 +46,12 @@ public class Main {
                 int res = getCandy(1, 1_000_000, 1, B);
                 sb.append(res).append("\n");
                 update(1, 1_000_000, 1, res, -1);
+                //segment[res]--;
             } else {
                 int C = Integer.parseInt(st.nextToken());
                 update(1, 1_000_000, 1, B, C);
+                //segment[B] += C;
             }
-
-           
         }
         System.out.print(sb);
     }
