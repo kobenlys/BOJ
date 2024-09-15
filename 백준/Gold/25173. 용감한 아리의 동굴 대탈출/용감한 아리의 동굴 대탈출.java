@@ -88,7 +88,7 @@ public class Main {
         vi[y][x] = true;
 
         st:
-        while (len <= Math.max(N, M)*2) {
+        while (len <= N+M) {
             len++;
 
             for (int i = 0; i < len; i++) {
