@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 22636 KB, 시간: 188 ms
+메모리: 16832 KB, 시간: 168 ms
 
 ### 분류
 
@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2024년 9월 16일 01:40:19
+2024년 9월 16일 23:46:56
 
 ### 문제 설명
 
@@ -46,10 +46,10 @@
 			<td style="text-align: center;">보스의 진행 방향이 ← 일 때</td>
 		</tr>
 		<tr>
-			<td style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/e4dd6817-6b86-46ba-aac0-09caf5be4639/" style="width: 250px; height: 259px;"></td>
-			<td style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/f7b45904-823d-40e4-90f0-7e5932a2a666/" style="width: 265px; height: 250px;"></td>
-			<td style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/783affa2-7eb7-45a4-85fd-6b2dd2625921/" style="width: 250px; height: 266px;"></td>
-			<td style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/752f5a08-59e1-427b-88d8-4c2ca4c09c80/" style="width: 263px; height: 250px;"></td>
+			<td style="text-align: center;"><img alt="" src="" style="width: 250px; height: 259px;"></td>
+			<td style="text-align: center;"><img alt="" src="" style="width: 265px; height: 250px;"></td>
+			<td style="text-align: center;"><img alt="" src="" style="width: 250px; height: 266px;"></td>
+			<td style="text-align: center;"><img alt="" src="" style="width: 263px; height: 250px;"></td>
 		</tr>
 	</tbody>
 </table>
