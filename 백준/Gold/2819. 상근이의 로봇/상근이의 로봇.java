@@ -34,24 +34,6 @@ public class Main {
         return idx;
     }
 
-    public static int binarySearchX1(int x) {
-        int idx = 0;
-        int left = 0, right = N - 1;
-
-        while (left <= right) {
-
-            int mid = (left + right) / 2;
-
-            if (x < cordiX.get(mid).x) {
-                right = mid - 1;
-            } else {
-                idx = mid;
-                left = mid + 1;
-            }
-        }
-        return idx;
-    }
-
     public static int binarySearchY(int y) {
         int idx = 0;
         int left = 0, right = N - 1;
@@ -66,27 +48,9 @@ public class Main {
                 left = mid + 1;
             }
         }
-        return idx;
-    }
-
-    public static int binarySearchY1(int y) {
-        int idx = 0;
-        int left = 0, right = N - 1;
-
-        while (left <= right) {
-            int mid = (left + right) / 2;
-
-            if (y < cordiY.get(mid).y) {
-                right = mid - 1;
-            } else {
-                idx = mid;
-                left = mid + 1;
-            }
-        }
 
         return idx;
     }
-
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -117,8 +81,6 @@ public class Main {
 
         String str = br.readLine();
 
-        // 1 2 3 3 3 3 4 5
-
         for (int i = 0; i < M; i++) {
             char t = str.charAt(i);
             int idx = 0;
@@ -132,8 +94,8 @@ public class Main {
 
                     break;
                 case ('J'):
+                    idx = binarySearchY(rbY);
                     rbY -= 1;
-                    idx = binarySearchY1(rbY);
                     answer -= idx + 1;
                     answer += N - (idx + 1);
 
@@ -146,8 +108,8 @@ public class Main {
 
                     break;
                 case ('Z'):
+                    idx = binarySearchX(rbX);
                     rbX -= 1;
-                    idx = binarySearchX1(rbX);
                     answer -= idx + 1;
                     answer += N - (idx + 1);
                     break;
