@@ -2,45 +2,41 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    public static int[] pattern;
 
-    public static void makeTable(String str) {
-        int len = str.length();
-        pattern = new int[len];
-        int index = 0;
-        for (int i = 1; i < len; i++) {
-            while (index > 0 && str.charAt(i) != str.charAt(index)) {
-                index = pattern[index - 1];
+    public static int[] makePattern(String str) {
+        int[] pattern = new int[str.length()];
+        int pos = 0;
+        for (int i = 1; i < pattern.length; i++) {
+            while (pos > 0 && str.charAt(i) != str.charAt(pos)) {
+                pos = pattern[pos - 1];
             }
-            if (str.charAt(i) == str.charAt(index)) {
-                pattern[i] = ++index;
+            if (str.charAt(i) == str.charAt(pos)) {
+                pattern[i] = ++pos;
             }
         }
+        return pattern;
     }
 
-    public static List<Integer> kmp(String str1, String str2) {
-        List<Integer> list = new ArrayList<>();
+    public static int kmp(String str1, String str2, int[] pattern, StringBuilder sb) {
         int matchCnt = 0;
-        int index = 0;
+        int pos = 0;
 
         for (int i = 0; i < str1.length(); i++) {
-            while (index > 0 && str1.charAt(i) != str2.charAt(index)) {
-                index = pattern[index - 1];
+            while (pos > 0 && str1.charAt(i) != str2.charAt(pos)) {
+                pos = pattern[pos - 1];
             }
 
-            if (str1.charAt(i) == str2.charAt(index)) {
-                if (index == str2.length() - 1) {
+            if (str1.charAt(i) == str2.charAt(pos)) {
+                if (str2.length() - 1 == pos) {
+                    sb.append(i - pos + 1).append(" ");
                     matchCnt++;
-                    list.add(i - index + 1);
-                    index = pattern[index];
+                    pos = pattern[pos];
                 } else {
-                    index++;
+                    pos++;
                 }
             }
         }
-
-        list.add(matchCnt);
-        return list;
+        return matchCnt;
     }
 
     public static void main(String[] args) throws IOException {
@@ -51,13 +47,9 @@ public class Main {
         String str1 = br.readLine();
         String str2 = br.readLine();
 
-        makeTable(str2);
-        List<Integer> list = kmp(str1, str2);
-        sb.append(list.get(list.size() - 1)).append("\n");
-
-        for (int i = 0; i < list.size() - 1; i++) {
-            sb.append(list.get(i)).append(" ");
-        }
+        int[] pattern = makePattern(str2);
+        int cnt = kmp(str1, str2, pattern, sb);
+        System.out.println(cnt);
         System.out.println(sb);
     }
 }
