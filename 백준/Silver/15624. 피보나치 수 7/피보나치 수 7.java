@@ -22,6 +22,7 @@ public class Main {
         StringTokenizer st;
 
         int N = Integer.parseInt(br.readLine());
+        dp[1] = 1;
         dfs(N);
         System.out.println(dp[N]);
     }
