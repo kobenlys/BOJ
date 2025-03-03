@@ -36,7 +36,7 @@ public class Main {
             for (Node tmp : list.get(now.goal)) {
                 long nextDist;
 
-                if (now.val <= tmp.val) {
+                if (now.val < tmp.val) {
                     nextDist = tmp.val;
                 } else {
                     nextDist = ((long) Math.ceil
