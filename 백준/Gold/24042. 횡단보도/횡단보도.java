@@ -37,10 +37,10 @@ public class Main {
                 long nextDist;
 
                 if (now.val <= tmp.val) {
-                    nextDist = tmp.val + 1;
+                    nextDist = tmp.val;
                 } else {
                     nextDist = ((long) Math.ceil
-                            (((double) now.val - tmp.val) / period)) * period + tmp.val + 1;
+                            (((double) now.val - tmp.val) / period)) * period + tmp.val;
                 }
 
                 if (dist[tmp.goal] > nextDist) {
@@ -71,8 +71,8 @@ public class Main {
             st = new StringTokenizer(br.readLine());
             int s = Integer.parseInt(st.nextToken());
             int e = Integer.parseInt(st.nextToken());
-            list.get(s).add(new Node(e, i));
-            list.get(e).add(new Node(s, i));
+            list.get(s).add(new Node(e, i + 1));
+            list.get(e).add(new Node(s, i + 1));
         }
 
         long answer = djikstra(M, N);
