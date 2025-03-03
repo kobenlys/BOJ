@@ -28,11 +28,10 @@ public class Main {
         
         while (!pq.isEmpty()) {
             Node now = pq.poll();
+            if(now.goal == size) break;
             if (dist[now.goal] < now.val) {
                 continue;
             }
-            
-            if(now.goal == size) break;
 
             for (Node tmp : list.get(now.goal)) {
                 long nextDist;
