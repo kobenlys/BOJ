@@ -25,22 +25,22 @@ public class Main {
         Arrays.fill(dist, Long.MAX_VALUE);
         pq.offer(new Node(1, 0));
         dist[1] = 0;
-
+        
         while (!pq.isEmpty()) {
             Node now = pq.poll();
-
             if (dist[now.goal] < now.val) {
                 continue;
             }
+            
+            if(now.goal == size) break;
 
             for (Node tmp : list.get(now.goal)) {
                 long nextDist;
 
                 if (now.val < tmp.val) {
                     nextDist = tmp.val;
-                } else {
-                    nextDist = ((long) Math.ceil
-                            (((double) now.val - tmp.val) / period)) * period + tmp.val;
+                }else{
+                    nextDist = (long) Math.ceil((double) ( now.val - tmp.val) / period) * period + tmp.val;
                 }
 
                 if (dist[tmp.goal] > nextDist) {
@@ -49,6 +49,7 @@ public class Main {
                 }
             }
         }
+
         return dist[size];
     }
 
