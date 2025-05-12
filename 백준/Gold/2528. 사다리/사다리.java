@@ -8,7 +8,7 @@ public class Main {
     public static class Stick {
 
         int left, right;
-        boolean direction; // false = left -> right, true = left <- right
+        boolean direction;
 
         public Stick(int left, int right, boolean direction) {
             this.left = left;
@@ -19,7 +19,7 @@ public class Main {
         public boolean isInRange(Stick topStick) {
             return !(this.right < topStick.left || this.left > topStick.right);
         }
-        
+
         public void move() {
             if (direction) {
                 if (left == 0) {
@@ -71,10 +71,6 @@ public class Main {
             Stick top = list.get(nowIndex+1);
 
             if (bottom.isInRange(top)) {
-//                System.out.println("time : " +  time);
-//                System.out.println(top.left + " " + top.right);
-//                System.out.println(bottom.left + " " + bottom.right);
-//                System.out.println();
                 nowIndex++;
                 continue;
             }
