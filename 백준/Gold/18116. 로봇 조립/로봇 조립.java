@@ -4,7 +4,7 @@ import java.util.*;
 public class Main {
 
     public static int[] parent;
-    public static Map<Integer, Integer> map = new HashMap<>();
+    public static int[] map = new int[1_000_001];
 
     public static int find(int x) {
         if (parent[x] == x) {
@@ -20,7 +20,7 @@ public class Main {
 
         if (from != to) {
             parent[to] = from;
-            map.put(find(x), map.get(from) + map.get(to));
+            map[find(x)] = map[from] + map[to];
         }
     }
 
@@ -34,7 +34,7 @@ public class Main {
 
         for (int i = 1; i <= 1_000_000; i++) {
             parent[i] = i;
-            map.put(i, 1);
+            map[i] = 1;
         }
 
         for (int i = 0; i < N; i++) {
@@ -46,7 +46,7 @@ public class Main {
                 int B = Integer.parseInt(st.nextToken());
                 union(A, B);
             } else {
-                sb.append(map.get(find(A))).append("\n");
+                sb.append(map[find(A)]).append("\n");
             }
         }
         System.out.println(sb);
