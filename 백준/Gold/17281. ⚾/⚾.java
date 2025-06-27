@@ -10,6 +10,11 @@ public class Main {
 
     public static void dfs(int start) {
 
+        if (start == 4) {
+            dfs(start + 1);
+            return;
+        }
+
         if (start == 10) {
             playBaseBall();
             return;
@@ -18,7 +23,7 @@ public class Main {
         for (int i = 1; i <= 9; i++) {
             if (!vi[i]) {
                 vi[i] = true;
-                player[i] = start;
+                player[start] = i;
                 dfs(start + 1);
                 vi[i] = false;
             }
@@ -27,7 +32,7 @@ public class Main {
 
     public static void playBaseBall() {
 
-        boolean[] base = new boolean[4]; // index 1~3: 1루~3루
+        boolean[] base = new boolean[4];
         int res = 0;
         int index = 1;
 
@@ -87,9 +92,9 @@ public class Main {
             }
         }
 
-        vi[4] = true;
         player[4] = 1;
-        dfs(2);
+        vi[1] = true;
+        dfs(1);
 
         System.out.println(answer);
     }
