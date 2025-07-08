@@ -25,13 +25,8 @@ public class Main {
 
             if (nowPos < number) {
 
-                for (int j = 0; j < N; j++) {
-                    nowPos++;
-                    answer++;
-                    if (nowPos <= number && number <= nowPos + M) {
-                        break;
-                    }
-                }
+                answer += number - (nowPos + M);
+                nowPos += number - (nowPos + M);
 
             } else if (number < nowPos) {
                 answer += nowPos - number;
