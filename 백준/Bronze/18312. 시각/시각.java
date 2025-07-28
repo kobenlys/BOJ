@@ -26,14 +26,10 @@ public class Main {
 
         while(hour <= N){
 
-            if(findK(hour, K)){
-                answer++;
-            } else if (findK(minute, K)) {
-                answer++;
-            } else if (findK(second, K)) {
+            if(findK(hour, K) || findK(minute, K) || findK(second, K)){
                 answer++;
             }
-
+            
             second++;
             if (second == 60) {
                 second = 0;
