@@ -7,6 +7,7 @@ public class Main {
     public static boolean[][] vi;
     public static int[][] arr1;
     public static List<Node> list;
+    public static List<Node> cache;
     public static int[] dx = {0, 0, -1, 1};
     public static int[] dy = {-1, 1, 0, 0};
 
@@ -21,17 +22,17 @@ public class Main {
         }
     }
 
-    public static void dfs(int start, int selectCnt) {
+    public static void dfs(int start) {
 
-        if (selectCnt == M) {
+        if (cache.size() == M) {
             bfs();
             return;
         }
 
         for (int i = start; i < list.size(); i++) {
-            list.get(i).step = -1;
-            dfs(i + 1, selectCnt + 1);
-            list.get(i).step = 0;
+            cache.add(list.get(i));
+            dfs(i+1);
+            cache.remove(cache.size() - 1);
         }
     }
 
@@ -41,13 +42,10 @@ public class Main {
         int res = 0;
         int nodeCnt = 0;
 
-        for (Node ch : list) {
-            if (ch.step == 0) {
-                continue;
-            }
+        for (Node ch : cache) {
             vi[ch.y][ch.x] = true;
             nodeCnt++;
-            qu.offer(new Node(ch.x, ch.y, 0));
+            qu.offer(ch);
         }
 
         while (!qu.isEmpty()) {
@@ -84,6 +82,7 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         list = new ArrayList<>();
+        cache = new ArrayList<>();
         answer = Integer.MAX_VALUE;
         arr1 = new int[N][N];
 
@@ -99,7 +98,7 @@ public class Main {
             }
         }
 
-        dfs(0, 0);
+        dfs(0);
         System.out.println(answer == Integer.MAX_VALUE ? -1 : answer);
     }
 }
