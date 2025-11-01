@@ -44,7 +44,7 @@ public class Main {
     }
 
     public static void dfs(int idx, Food cache) {
-
+        
         if (cache.isTargetMet()) {
             if (min >= cache.price) {
                 if (min > cache.price) {
@@ -56,7 +56,7 @@ public class Main {
             return;
         }
 
-        if (idx == N) {
+        if (idx == N || min <= cache.price) {
             return;
         }
 
