@@ -15,7 +15,6 @@ public class Main {
                 cnt += dfs(e) + 1;
             }
         }
-
         return cnt;
     }
 
@@ -28,7 +27,7 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         vi = new boolean[N + 1];
-
+        // 오일러 경로 공식 사용
         for (int i = 0; i <= N; i++) {
             list.add(new ArrayList<>());
         }
@@ -40,23 +39,24 @@ public class Main {
             list.get(s).add(e);
             list.get(e).add(s);
         }
-
+        
+        // #1. 모든 노드가 이어져있는지
         if (N != dfs(1)) {
             System.out.println("NO");
             return;
         }
 
         int odd = 0;
-        int even = 0;
         for (int i = 1; i <= N; i++) {
-            if (list.get(i).size() % 2 == 0) {
-                even++;
-            } else {
+            if (list.get(i).size() % 2 != 0) {
                 odd++;
             }
         }
-
-        if (odd == 2 || even == N) {
+        
+        // #2. 오일러 경로 공식
+        //        모든 노드의 차수가 짝수인 경우
+        //        특정 두 노드만 차수가 홀수인 경우
+        if (odd == 2 || odd == 0) {
             System.out.println("YES");
         } else {
             System.out.println("NO");
