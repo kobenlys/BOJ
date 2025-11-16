@@ -13,7 +13,7 @@ public class Main {
         int M = Integer.parseInt(st.nextToken());
         int answer = N * M;
 
-        if (answer % 2 > 0 && N*M > 1) {
+        if (answer % 2 > 0) {
             answer--;
         }
         System.out.println(answer);
