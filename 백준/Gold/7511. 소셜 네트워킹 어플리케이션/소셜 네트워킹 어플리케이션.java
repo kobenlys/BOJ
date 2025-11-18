@@ -56,12 +56,7 @@ public class Main {
                 int from = find(s);
                 int to = find(e);
 
-                if (from == to) {
-                    sb.append(1);
-                } else {
-                    sb.append(0);
-                }
-                sb.append("\n");
+                sb.append(from == to ? 1 : 0).append("\n");
             }
             sb.append("\n");
         }
