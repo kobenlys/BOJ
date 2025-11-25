@@ -52,7 +52,7 @@ public class Main {
 
             int mid = (left + right) >> 1;
             if (isPossible(mid)) {
-                answer = Math.min(answer, mid);
+                answer = mid;
                 right = mid - 1;
             } else {
                 left = mid + 1;
