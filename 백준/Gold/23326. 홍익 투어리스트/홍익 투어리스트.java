@@ -6,7 +6,7 @@ public class Main {
     public static int N, M;
     public static int[] minSegment;
 
-    public static void minUpdate(int start, int end, int idx, int id, int val) {
+    public static void minUpdate(int start, int end, int idx, int id) {
 
         if (start > id || end < id) {
             return;
@@ -14,15 +14,15 @@ public class Main {
 
         if (start == end) {
             if (minSegment[idx] == Integer.MAX_VALUE) {
-                minSegment[idx] = val;
+                minSegment[idx] = id;
             } else {
                 minSegment[idx] = Integer.MAX_VALUE;
             }
             return;
         }
         int mid = (start + end) / 2;
-        minUpdate(start, mid, idx * 2, id, val);
-        minUpdate(mid + 1, end, idx * 2 + 1, id, val);
+        minUpdate(start, mid, idx * 2, id);
+        minUpdate(mid + 1, end, idx * 2 + 1, id);
         minSegment[idx] = Math.min(minSegment[idx * 2], minSegment[idx * 2 + 1]);
     }
 
@@ -54,7 +54,7 @@ public class Main {
         st = new StringTokenizer(br.readLine());
         for (int i = 1; i <= N; i++) {
             if ("1".equals(st.nextToken())) {
-                minUpdate(1, N, 1, i, i);
+                minUpdate(1, N, 1, i);
             }
         }
 
@@ -63,7 +63,7 @@ public class Main {
 
             if ("1".equals(command[0])) {
                 int num = Integer.parseInt(command[1]);
-                minUpdate(1, N, 1, num, num);
+                minUpdate(1, N, 1, num);
             } else if ("2".equals(command[0])) {
                 nowPos = (nowPos + Integer.parseInt(command[1])) % N;
                 if (nowPos == 0) {
