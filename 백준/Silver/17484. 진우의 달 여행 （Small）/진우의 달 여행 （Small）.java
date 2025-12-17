@@ -40,7 +40,7 @@ public class Main {
                     continue;
                 }
 
-                if (nx < 0 || ny < 0 || nx >= M || ny >= N) {
+                if (nx < 0 || nx >= M) {
                     continue;
                 }
 
