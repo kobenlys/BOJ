@@ -18,8 +18,29 @@
 |  |
 | ------- |
 | [0001-two-sum](https://github.com/kobenlys/Algorithm_Solve/tree/master/0001-two-sum) |
+| [1970-last-day-where-you-can-still-cross](https://github.com/kobenlys/Algorithm_Solve/tree/master/1970-last-day-where-you-can-still-cross) |
 ## Hash Table
 |  |
 | ------- |
 | [0001-two-sum](https://github.com/kobenlys/Algorithm_Solve/tree/master/0001-two-sum) |
+## Binary Search
+|  |
+| ------- |
+| [1970-last-day-where-you-can-still-cross](https://github.com/kobenlys/Algorithm_Solve/tree/master/1970-last-day-where-you-can-still-cross) |
+## Depth-First Search
+|  |
+| ------- |
+| [1970-last-day-where-you-can-still-cross](https://github.com/kobenlys/Algorithm_Solve/tree/master/1970-last-day-where-you-can-still-cross) |
+## Breadth-First Search
+|  |
+| ------- |
+| [1970-last-day-where-you-can-still-cross](https://github.com/kobenlys/Algorithm_Solve/tree/master/1970-last-day-where-you-can-still-cross) |
+## Union Find
+|  |
+| ------- |
+| [1970-last-day-where-you-can-still-cross](https://github.com/kobenlys/Algorithm_Solve/tree/master/1970-last-day-where-you-can-still-cross) |
+## Matrix
+|  |
+| ------- |
+| [1970-last-day-where-you-can-still-cross](https://github.com/kobenlys/Algorithm_Solve/tree/master/1970-last-day-where-you-can-still-cross) |
 <!---LeetCode Topics End-->
