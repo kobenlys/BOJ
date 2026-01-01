@@ -18,6 +18,7 @@
 |  |
 | ------- |
 | [0001-two-sum](https://github.com/kobenlys/Algorithm_Solve/tree/master/0001-two-sum) |
+| [0066-plus-one](https://github.com/kobenlys/Algorithm_Solve/tree/master/0066-plus-one) |
 | [1970-last-day-where-you-can-still-cross](https://github.com/kobenlys/Algorithm_Solve/tree/master/1970-last-day-where-you-can-still-cross) |
 ## Hash Table
 |  |
@@ -43,4 +44,8 @@
 |  |
 | ------- |
 | [1970-last-day-where-you-can-still-cross](https://github.com/kobenlys/Algorithm_Solve/tree/master/1970-last-day-where-you-can-still-cross) |
+## Math
+|  |
+| ------- |
+| [0066-plus-one](https://github.com/kobenlys/Algorithm_Solve/tree/master/0066-plus-one) |
 <!---LeetCode Topics End-->
