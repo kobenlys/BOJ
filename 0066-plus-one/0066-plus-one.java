@@ -12,10 +12,6 @@ class Solution {
         if (digits[0] == 10) {
             int[] tmpArr = new int[len + 1];
             tmpArr[0] = 1;
-            digits[0] = 0;
-            for (int i = 0; i < len; i++) {
-                tmpArr[i + 1] = digits[i];
-            }
             return tmpArr;
         }
 
