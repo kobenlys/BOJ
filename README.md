@@ -58,4 +58,8 @@
 |  |
 | ------- |
 | [0021-merge-two-sorted-lists](https://github.com/kobenlys/Algorithm_Solve/tree/master/0021-merge-two-sorted-lists) |
+## Dynamic Programming
+|  |
+| ------- |
+| [1411-number-of-ways-to-paint-n-3-grid](https://github.com/kobenlys/Algorithm_Solve/tree/master/1411-number-of-ways-to-paint-n-3-grid) |
 <!---LeetCode Topics End-->
