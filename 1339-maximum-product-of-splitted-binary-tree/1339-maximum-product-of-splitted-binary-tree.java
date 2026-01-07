@@ -17,7 +17,7 @@ class Solution {
 
     public long answer;
 
-    public int dfsMax(TreeNode curr) {
+    public long dfsMax(TreeNode curr) {
 
         if (curr == null) {
             return 0;
@@ -39,7 +39,7 @@ class Solution {
 
     public int maxProduct(TreeNode root) {
 
-        int max = dfsMax(root);
+        long max = dfsMax(root);
         dfsAnswer(root, max);
 
         return (int) (this.answer % 1_000_000_007);
