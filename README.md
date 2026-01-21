@@ -10,6 +10,7 @@
 |  |
 | ------- |
 | [0020-valid-parentheses](https://github.com/kobenlys/Algorithm_Solve/tree/master/0020-valid-parentheses) |
+| [0125-valid-palindrome](https://github.com/kobenlys/Algorithm_Solve/tree/master/0125-valid-palindrome) |
 | [0712-minimum-ascii-delete-sum-for-two-strings](https://github.com/kobenlys/Algorithm_Solve/tree/master/0712-minimum-ascii-delete-sum-for-two-strings) |
 ## Stack
 |  |
@@ -89,4 +90,8 @@
 | ------- |
 | [1161-maximum-level-sum-of-a-binary-tree](https://github.com/kobenlys/Algorithm_Solve/tree/master/1161-maximum-level-sum-of-a-binary-tree) |
 | [1339-maximum-product-of-splitted-binary-tree](https://github.com/kobenlys/Algorithm_Solve/tree/master/1339-maximum-product-of-splitted-binary-tree) |
+## Two Pointers
+|  |
+| ------- |
+| [0125-valid-palindrome](https://github.com/kobenlys/Algorithm_Solve/tree/master/0125-valid-palindrome) |
 <!---LeetCode Topics End-->
